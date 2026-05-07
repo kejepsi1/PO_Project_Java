@@ -50,6 +50,14 @@ public abstract class Organizm {
     public boolean CzyOdpycha(Organizm napastnik){
         return false;
     }
+    public boolean SprawdzajSasiadow(int x,int y){
+        for (int i = 0; i < swiat.GetOrganizmy().size();i++){
+            if (x == swiat.GetOrganizmy().get(i).GetPolozenieX() && y == swiat.GetOrganizmy().get(i).GetPolozenieY()){
+                return false;
+            }
+        }
+        return true;
+    }
     public void Akcja(int klawisz) {
         if (this.wiek == 0) {
             return;

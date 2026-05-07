@@ -96,8 +96,12 @@ public class Plansza extends JPanel {
                 }
                 if (org instanceof Zolw){
                     pola[orgY][orgX].setBackground(Color.MAGENTA);
+                    pola[orgY][orgX].setText("Z");
                 }
-
+                if (org instanceof Antylopa){
+                    pola[orgY][orgX].setBackground(Color.PINK);
+                    pola[orgY][orgX].setText("A");
+                }
             }
         }
     }

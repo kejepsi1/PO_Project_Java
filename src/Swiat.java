@@ -23,6 +23,7 @@ public class Swiat {
             this.DodajBezpiecznieOrganizm(new Mlecz(0,0,this));
             this.DodajBezpiecznieOrganizm(new Lis(0,0,this));
             this.DodajBezpiecznieOrganizm(new Zolw(0,0,this));
+            this.DodajBezpiecznieOrganizm(new Antylopa(0,0,this));
         }
     }
 
