@@ -81,6 +81,23 @@ public class Plansza extends JPanel {
                     pola[orgY][orgX].setBackground(Color.BLUE);
                     pola[orgY][orgX].setText("C");
                 }
+
+                if (org instanceof Owca){
+                    pola[orgY][orgX].setBackground(Color.LIGHT_GRAY);
+                    pola[orgY][orgX].setText("O");
+                }
+                if (org instanceof Mlecz){
+                    pola[orgY][orgX].setBackground(Color.YELLOW);
+                    pola[orgY][orgX].setText("M");
+                }
+                if (org instanceof Lis){
+                    pola[orgY][orgX].setBackground(Color.ORANGE);
+                    pola[orgY][orgX].setText("L");
+                }
+                if (org instanceof Zolw){
+                    pola[orgY][orgX].setBackground(Color.MAGENTA);
+                }
+
             }
         }
     }

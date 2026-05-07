@@ -12,15 +12,17 @@ public class GlowneOkno extends JFrame implements KeyListener {
     private JTextArea dziennikZdarzen;
     private int wcisnietyKlawisz = 0;
 
-    public GlowneOkno() {
+    public GlowneOkno(int x, int y) {
         setTitle("Wirtualny Świat - Mikołaj Tchorek, s208435");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLayout(new BorderLayout());
 
-        swiat = new Swiat(20, 20);
+        //TODO: mapa wpisywana w interfejsie, postacie zapisywane do JSONa
 
-        plansza = new Plansza(swiat, 20, 20);
+        swiat = new Swiat(y,x);
+
+        plansza = new Plansza(swiat, x, y);
 
         add(plansza, BorderLayout.CENTER);
 

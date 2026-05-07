@@ -15,11 +15,14 @@ public class Swiat {
         this.y = y;
         this.komunikaty = new ArrayList<>();
         this.organizmy = new ArrayList<>();
-
         this.DodajBezpiecznieOrganizm(new Czlowiek(0,0,this));
         for (int i = 0;i < 5;i++){
             this.DodajBezpiecznieOrganizm(new Wilk(0,0,this));
             this.DodajBezpiecznieOrganizm(new Trawa(0,0,this));
+            this.DodajBezpiecznieOrganizm(new Owca(0,0,this));
+            this.DodajBezpiecznieOrganizm(new Mlecz(0,0,this));
+            this.DodajBezpiecznieOrganizm(new Lis(0,0,this));
+            this.DodajBezpiecznieOrganizm(new Zolw(0,0,this));
         }
     }
 
@@ -119,7 +122,8 @@ public class Swiat {
     }
 
     public void DodajOrganizm(Organizm organizm) {
-        this.organizmy.add(organizm);
+        if (organizm != null)
+            this.organizmy.add(organizm);
     }
 
     public void WykonajTure(int wcisnietyKlawisz){
