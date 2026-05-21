@@ -1,6 +1,3 @@
-import java.util.Random;
-
-
 public abstract class Organizm {
     Organizm(int sila, int inicjatywa, int PolozenieX, int PolozenieY,Swiat swiat, char znak){
         this.sila=sila;
@@ -17,91 +14,49 @@ public abstract class Organizm {
     protected char znak;
     protected Swiat swiat;
     protected boolean czyZyje = true;
-    public int GetWiek(){
+    public int WezWiek(){
         return this.wiek;
     }
-    public int GetSila(){
+    public int WezSila(){
         return this.sila;
     }
-    public int GetInicjatywa(){
+    public int WezInicjatywa(){
         return this.inicjatywa;
     }
-    public int GetPolozenieX(){
+    public int WezPolozenieX(){
         return this.PolozenieX;
     }
-    public int GetPolozenieY(){
+    public int WezPolozenieY(){
         return this.PolozenieY;
     }
-    public char GetZnak(){
+    public char WezZnak(){
         return this.znak;
     }
-    public void SetPolozenieX(int x){
+    public void UstawPolozenieX(int x){
         this.PolozenieX = x;
     }
-    public void SetPolozenieY(int y){
+    public void UstawPolozenieY(int y){
         this.PolozenieY = y;
     }
-    public void SetWiek(int wiek){
+    public void UstawWiek(int wiek){
         this.wiek = wiek;
     }
-    public void SetSila(int sila){
+    public void UstawSila(int sila){
         this.sila = sila;
     }
     public boolean CzyOdpycha(Organizm napastnik){
         return false;
     }
     public boolean SprawdzajSasiadow(int x,int y){
-        for (int i = 0; i < swiat.GetOrganizmy().size();i++){
-            if (x == swiat.GetOrganizmy().get(i).GetPolozenieX() && y == swiat.GetOrganizmy().get(i).GetPolozenieY()){
+        for (int i = 0; i < swiat.WezOrganizmy().size();i++){
+            if (swiat.WezOrganizmy().get(i).CzyZyje() && x == swiat.WezOrganizmy().get(i).WezPolozenieX() && y == swiat.WezOrganizmy().get(i).WezPolozenieY()){
                 return false;
             }
         }
         return true;
     }
-    public void Akcja(int klawisz) {
-        if (this.wiek == 0) {
-            return;
-        }
-        StarePolozenieX=PolozenieX;
-        StarePolozenieY=PolozenieY;
-        int noweX = PolozenieX;
-        int noweY = PolozenieY;
-        int ruch = (int)(Math.random() * 8);
-        switch (ruch) {
-            case 0:
-                noweX+=1;
-                break;
-            case 1:
-                noweX-=1;
-                break;
-            case 2:
-                noweY+=1;
-                break;
-            case 3:
-                noweY-=1;
-                break;
-            case 4:
-                noweY-=1;
-                noweX-=1;
-                break;
-            case 5:
-                noweY-=1;
-                noweX+=1;
-                break;
-            case 6:
-                noweY+=1;
-                noweX-=1;
-                break;
-            case 7:
-                noweY+=1;
-                noweX+=1;
-                break;
-        }
-        if (noweX >= 0 && noweX < swiat.GetX() && noweY >=0 && noweY < swiat.GetY()) {
-            PolozenieX=noweX;
-            PolozenieY=noweY;
-        }
-    }
+
+    public abstract void Akcja(int klawisz);
 
     public void Kolizja() {
         swiat.SprawdzajKolizje(this);
@@ -140,7 +95,7 @@ public abstract class Organizm {
     }
 
     public boolean CzyObronil(Organizm napastnik) {
-        if (napastnik.GetSila() >= this.GetSila()) {
+        if (napastnik.WezSila() >= this.WezSila()) {
             return false;
         }
         return true;

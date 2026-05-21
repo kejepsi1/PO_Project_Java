@@ -33,7 +33,7 @@ public class Lis extends Zwierze{
             int potencjalneX = PolozenieX + mozliweX[i];
             int potencjalneY = PolozenieY + mozliweY[i];
 
-            if (potencjalneX >= 0 && potencjalneX < swiat.GetX() && potencjalneY >= 0 && potencjalneY < swiat.GetY()) {
+            if (potencjalneX >= 0 && potencjalneX < swiat.WezX() && potencjalneY >= 0 && potencjalneY < swiat.WezY()) {
                 if (DobryWech(potencjalneX, potencjalneY)) {
                     bezpieczne.add(i);
                 }
@@ -56,9 +56,9 @@ public class Lis extends Zwierze{
     }
 
     private boolean DobryWech ( int x, int y) {
-        for (int i = 0; i < swiat.GetOrganizmy().size(); i++) {
-            if (x == swiat.GetOrganizmy().get(i).GetPolozenieX() && y == swiat.GetOrganizmy().get(i).GetPolozenieY()) {
-                if (swiat.GetOrganizmy().get(i).CzyZyje() && sila < swiat.GetOrganizmy().get(i).GetSila()) {
+        for (int i = 0; i < swiat.WezOrganizmy().size(); i++) {
+            if (x == swiat.WezOrganizmy().get(i).WezPolozenieX() && y == swiat.WezOrganizmy().get(i).WezPolozenieY()) {
+                if (swiat.WezOrganizmy().get(i).CzyZyje() && sila < swiat.WezOrganizmy().get(i).WezSila()) {
                     return false;
                 }
             }

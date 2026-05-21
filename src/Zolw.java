@@ -16,7 +16,7 @@ public class Zolw extends Zwierze {
 
     @Override
     public boolean CzyOdpycha(Organizm napastnik){
-        if (napastnik.GetSila() < 5){
+        if (napastnik.WezSila() < 5){
             napastnik.Cofnij();
             return true;
         }

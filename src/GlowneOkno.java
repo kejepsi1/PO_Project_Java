@@ -18,7 +18,6 @@ public class GlowneOkno extends JFrame implements KeyListener {
         setSize(800, 600);
         setLayout(new BorderLayout());
 
-        //TODO: mapa wpisywana w interfejsie, postacie zapisywane do JSONa
 
         swiat = new Swiat(y,x);
 
@@ -28,6 +27,8 @@ public class GlowneOkno extends JFrame implements KeyListener {
 
         JPanel panelSterowania = new JPanel();
         panelSterowania.setLayout(new BorderLayout());
+
+        JPanel panelPrzyciskow = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         JButton btnNastepnaTura = new JButton("Następna tura");
 
@@ -45,48 +46,64 @@ public class GlowneOkno extends JFrame implements KeyListener {
                 odswiezDziennik();
             }
         });
-        panelSterowania.add(btnNastepnaTura, BorderLayout.NORTH);
 
-        // Pole tekstowe na logi
+        JButton btnZapisz = new JButton("Zapisz");
+        btnZapisz.setFocusable(false);
+        btnZapisz.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                swiat.ZapiszDoPliku();
+                odswiezDziennik();
+            }
+        });
+
+        JButton btnWczytaj = new JButton("Wczytaj");
+        btnWczytaj.setFocusable(false);
+        btnWczytaj.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                swiat.WczytajZPliku();
+                plansza.odswiezPlansze();
+                odswiezDziennik();
+            }
+        });
+        panelPrzyciskow.add(btnNastepnaTura);
+        panelPrzyciskow.add(btnZapisz);
+        panelPrzyciskow.add(btnWczytaj);
+
+        panelSterowania.add(panelPrzyciskow, BorderLayout.NORTH);
+
         dziennikZdarzen = new JTextArea(10, 20);
-        dziennikZdarzen.setEditable(false); // Blokujemy możliwość pisania przez gracza
+        dziennikZdarzen.setEditable(false);
         dziennikZdarzen.setFocusable(false);
-        JScrollPane scrollPane = new JScrollPane(dziennikZdarzen); // Dodajemy suwak
+        JScrollPane scrollPane = new JScrollPane(dziennikZdarzen);
         panelSterowania.add(scrollPane, BorderLayout.CENTER);
 
-        // Dodajemy panel sterowania na dół głównego okna (lub na wschód - BorderLayout.EAST)
         add(panelSterowania, BorderLayout.SOUTH);
 
-        // Pierwsze narysowanie planszy
         plansza.odswiezPlansze();
-        // Nasłuchiwanie klawiszy dla CAŁEGO okna
         this.addKeyListener(this);
         this.setFocusable(true);
-        this.requestFocusInWindow(); // Zmuszamy okno do słuchania
+        this.requestFocusInWindow();
 
-        // Wyświetlenie okna
         setVisible(true);
     }
 
-    // --- Metody z interfejsu KeyListener ---
     @Override
     public void keyPressed(KeyEvent e) {
-        // Kiedy gracz wciska przycisk, po prostu go zapamiętujemy
         wcisnietyKlawisz = e.getKeyCode();
 
-        // Możesz tu dać System.out.println("Wciśnięto: " + zapamietanyKlawisz); żeby testować
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {} // Niepotrzebne
+    public void keyReleased(KeyEvent e) {}
     @Override
-    public void keyTyped(KeyEvent e) {}    // Niepotrzebne
+    public void keyTyped(KeyEvent e) {}
 
     private void odswiezDziennik() {
-        dziennikZdarzen.setText(""); // Czyścimy stare logi
+        dziennikZdarzen.setText("");
         dziennikZdarzen.append("--- RAPORT Z TURY ---\n");
-        // Zakładam, że przeniesiesz listę komunikatów z C++
-        for (String komunikat : swiat.GetKomunikaty()) {
+        for (String komunikat : swiat.WezKomunikaty()) {
             dziennikZdarzen.append(komunikat + "\n");
        }
     }

@@ -7,7 +7,7 @@ public class Antylopa extends Zwierze {
     private static final char ZNAK_ANTYLOPY = 'A';
 
     public Antylopa(int PolozenieX, int PolozenieY, Swiat swiat) {
-        super(2, 1, PolozenieX, PolozenieY, swiat, ZNAK_ANTYLOPY);
+        super(4, 4, PolozenieX, PolozenieY, swiat, ZNAK_ANTYLOPY);
     }
 
     @Override
@@ -50,14 +50,14 @@ public class Antylopa extends Zwierze {
                 noweX+=2;
                 break;
         }
-        if (noweX >= 0 && noweX < swiat.GetX() && noweY >=0 && noweY < swiat.GetY()) {
+        if (noweX >= 0 && noweX < swiat.WezX() && noweY >=0 && noweY < swiat.WezY()) {
             PolozenieX=noweX;
             PolozenieY=noweY;
         }
     }
 
     @Override
-    public boolean CzyOdpycha(Organizm napastnik) {
+    public boolean UniknijSmierci(Organizm napastnik) {
         int czy_ucieknie = (int) (Math.random() * 2);
         if (czy_ucieknie == 0) {
             int mozliweX[] = {-1, 1, 0, 0, -1, -1, 1, 1};
@@ -67,7 +67,7 @@ public class Antylopa extends Zwierze {
                 int potencjalneX = PolozenieX + mozliweX[i];
                 int potencjalneY = PolozenieY + mozliweY[i];
 
-                if (potencjalneX >= 0 && potencjalneX < swiat.GetX() && potencjalneY >= 0 && potencjalneY < swiat.GetY()) {
+                if (potencjalneX >= 0 && potencjalneX < swiat.WezX() && potencjalneY >= 0 && potencjalneY < swiat.WezY()) {
                     if (SprawdzajSasiadow(potencjalneX, potencjalneY)) {
                         bezpieczne.add(i);
                     }
@@ -86,6 +86,9 @@ public class Antylopa extends Zwierze {
                 StarePolozenieY = PolozenieY;
                 PolozenieX = noweX;
                 PolozenieY = noweY;
+                String tekst = "Antylopa ucieka przed ";
+                tekst += napastnik.WezZnak();
+                swiat.DodajKomunikat(tekst);
                 return true;
             }
         }
